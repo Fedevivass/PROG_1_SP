@@ -34,7 +34,7 @@ def mostrar_menu(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event
 
     mostrar_texto(lista_botones[BOTON_JUGAR]["superficie"],"JUGAR",(135,10),FUENTE_TEXTO)
     mostrar_texto(lista_botones[BOTON_NIVEL]["superficie"],"NIVELES",(135,10),FUENTE_TEXTO)
-    mostrar_texto(lista_botones[BOTON_PUNTUACIONES]["superficie"],"RANKINGS",(135,10),FUENTE_TEXTO)
+    mostrar_texto(lista_botones[BOTON_PUNTUACIONES]["superficie"],"PUNTUACIONES",(135,10),FUENTE_TEXTO)
     mostrar_texto(lista_botones[BOTON_SALIR]["superficie"],"SALIR",(135,10),FUENTE_TEXTO)
 
 
