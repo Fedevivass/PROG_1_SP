@@ -282,35 +282,17 @@ def crear_botones_menu() -> list:
     
     return lista_botones
 
-def verificar_sudoku(matriz_juego:list, matriz_correcta:list, datos_juego:dict):
-    """
-    Compara la matriz ingresada por el jugador con la matriz correcta del Sudoku
-    y actualiza la puntuación según coincidencias o errores.
+def verificar_sudoku(matriz_juego:list, matriz_correcta:list, matriz_inicial:list, datos_juego:dict):
 
-    Por cada celda de la matriz, si el valor coincide con el valor correcto,
-    se suma 1 punto a la puntuación. Si no coincide, se resta 1 punto.
-
-    Parámetros
-    matriz_juego : list
-        Matriz 9x9 que contiene los valores ingresados por el jugador.
-    matriz_correcta : list
-        Matriz 9x9 con la solución correcta del Sudoku.
-    datos_juego : dict
-        Diccionario de estado del juego que contiene al menos la clave:
-        - "puntuacion": valor entero que será incrementado o decrementado
-          según los aciertos y errores del jugador.
-
-    Retorna
-    None
-        La función modifica directamente el valor de `datos_juego["puntuacion"]`
-        pero no retorna ningún valor.
-    """
     for i in range(len(matriz_correcta)):
         for j in range(len(matriz_correcta[0])):
-            if matriz_correcta[i][j] == matriz_juego[i][j]:
-                datos_juego["puntuacion"] += 1
-            else:
-                datos_juego["puntuacion"] -= 1
+
+            if matriz_inicial[i][j] == 0:
+                if matriz_juego[i][j] == matriz_correcta[i][j]:
+                    if matriz_juego[i][j] != 0:
+                        datos_juego["puntuacion"] += 1
+                elif matriz_juego[i][j] != 0:
+                    datos_juego["puntuacion"] -= 1
 
 def limpiar_superficie(elemento_juego:dict, textura:str, ancho:int, alto:int) -> None:
     """

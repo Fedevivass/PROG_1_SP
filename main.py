@@ -23,7 +23,7 @@ while corriendo:
     if ventana_actual == "menu":
         ventana_actual = mostrar_menu(pantalla,cola_eventos)
     elif ventana_actual == "jugar":
-        ventana_actual = mostrar_juego(pantalla,cola_eventos,matriz_juego,matriz_correcta,datos_juego)
+        ventana_actual = mostrar_juego(pantalla,cola_eventos,matriz_juego,matriz_correcta,matriz_inicial,datos_juego)
     elif ventana_actual == "niveles":
         pass
     elif ventana_actual == "puntuaciones":

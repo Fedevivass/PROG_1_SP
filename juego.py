@@ -12,7 +12,7 @@ boton_listo = crear_elemento_juego(r"C:\Users\feder\Desktop\juego progra\boton_l
 boton_reset = crear_elemento_juego(r"C:\Users\feder\Desktop\juego progra\boton_reset.png",100,90,100,600)
 
 
-def mostrar_juego(pantalla:pygame.Surface, cola_eventos:list[pygame.event.Event], matriz_juego:list,matriz_correcta:list,datos_juego:dict) -> str:
+def mostrar_juego(pantalla:pygame.Surface, cola_eventos:list[pygame.event.Event],matriz_juego:list,matriz_correcta:list,matriz_inicial:list,datos_juego:dict) -> str:
     retorno = "jugar"
 
     for evento in cola_eventos:
@@ -34,15 +34,19 @@ def mostrar_juego(pantalla:pygame.Surface, cola_eventos:list[pygame.event.Event]
                 if boton_volver["rectangulo"].collidepoint(evento.pos):
                     retorno = "menu"
                 if boton_listo["rectangulo"].collidepoint(evento.pos):
-                    verificar_sudoku(matriz_juego,matriz_correcta,datos_juego)
+                    verificar_sudoku(matriz_juego,matriz_correcta,matriz_inicial,datos_juego)
                     if datos_juego["puntuacion"] > 100 :
                         retorno = "terminado"
                 if boton_reset["rectangulo"].collidepoint(evento.pos):
                     datos_juego["puntuacion"] = 0
-                    for i in range(9):
-                        for j in range(9):
+                    for i in range(len(matriz_correcta)):
+                        for j in range(len(matriz_correcta[0])):
                             matriz_juego[i][j] = matriz_correcta[i][j]
-                    colocar_ceros(matriz_juego, 76)
+                    colocar_ceros(matriz_juego, 10)
+
+                    for i in range(len(matriz_correcta)):
+                        for j in range(len(matriz_correcta[0])):
+                            matriz_inicial[i][j] = matriz_juego[i][j]
 
                     datos_juego["fila_sel"] = None
                     datos_juego["col_sel"] = None
@@ -58,13 +62,13 @@ def mostrar_juego(pantalla:pygame.Surface, cola_eventos:list[pygame.event.Event]
                 if evento.key == pygame.K_BACKSPACE:
                     matriz_juego[fila][col] = 0
             if evento.key == pygame.K_RETURN:
-                verificar_sudoku(matriz_juego, matriz_correcta, datos_juego)
+                verificar_sudoku(matriz_juego, matriz_correcta,matriz_inicial, datos_juego)
                 if datos_juego["puntuacion"] > 100 or datos_juego["puntuacion"] < -100:
                     retorno = "terminado"
             if evento.key == pygame.K_r:
                 datos_juego["puntuacion"] = 0
-                for i in range(9):
-                    for j in range(9):
+                for i in range(len(matriz_correcta)):
+                    for j in range(len(matriz_correcta[0])):
                         matriz_juego[i][j] = matriz_correcta[i][j]
                 colocar_ceros(matriz_juego, 76)
 
